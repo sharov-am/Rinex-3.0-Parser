@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rinex3Parser2008", "Rinex3Parser\Rinex3Parser2008.csproj", "{630AB9B4-33E4-414A-A222-70FE0972CDAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F1B59C1-2724-4832-B65F-4EFEE8B8C184}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rinex3ParserTest2008", "Rinex3ParserTest2008\Rinex3ParserTest2008.csproj", "{DC076D7B-5590-47ED-AEE0-481CDBBD6FCF}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Rinex3Parser20081.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{630AB9B4-33E4-414A-A222-70FE0972CDAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630AB9B4-33E4-414A-A222-70FE0972CDAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630AB9B4-33E4-414A-A222-70FE0972CDAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630AB9B4-33E4-414A-A222-70FE0972CDAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC076D7B-5590-47ED-AEE0-481CDBBD6FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC076D7B-5590-47ED-AEE0-481CDBBD6FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC076D7B-5590-47ED-AEE0-481CDBBD6FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC076D7B-5590-47ED-AEE0-481CDBBD6FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

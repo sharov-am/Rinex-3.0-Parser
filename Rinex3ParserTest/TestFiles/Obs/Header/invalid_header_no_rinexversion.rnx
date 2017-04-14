@@ -1,0 +1,34 @@
+﻿GR10 V3.22          CNES                20160327 235944 UTC PGM / RUN BY / DATE
+SNR is mapped to RINEX snr flag value [1-9]                 COMMENT
+LX:     < 12dBHz -> 1; 12-17dBHz -> 2; 18-23dBHz -> 3       COMMENT
+       24-29dBHz -> 4; 30-35dBHz -> 5; 36-41dBHz -> 6       COMMENT
+       42-47dBHz -> 7; 48-53dBHz -> 8; >= 54dBHz -> 9       COMMENT
+23101M005                                                   MARKER NUMBER
+REGINA              CNES                                    OBSERVER / AGENCY
+1700870             LEICA GR10          3.22/6.521          REC # / TYPE / VERS
+725039              LEIAR25.R4      LEIT                    ANT # / TYPE
+ -1837002.6304  6065627.3599  -716183.2716                  APPROX POSITION XYZ
+        0.0000        0.0000        0.0000                  ANTENNA: DELTA H/E/N
+G   16 C1C L1C D1C S1C C2S L2S D2S S2S C2W L2W D2W S2W C5Q  SYS / # / OBS TYPES
+       L5Q D5Q S5Q                                          SYS / # / OBS TYPES
+R    8 C1C L1C D1C S1C C2P L2P D2P S2P                      SYS / # / OBS TYPES
+E   16 C1C L1C D1C S1C C5Q L5Q D5Q S5Q C7Q L7Q D7Q S7Q C8Q  SYS / # / OBS TYPES
+       L8Q D8Q S8Q                                          SYS / # / OBS TYPES
+C    8 C1I L1I D1I S1I C7I L7I D7I S7I                      SYS / # / OBS TYPES
+J   12 C1C L1C D1C S1C C2S L2S D2S S2S C5Q L5Q D5Q S5Q      SYS / # / OBS TYPES
+S    4 C1C L1C D1C S1C                                      SYS / # / OBS TYPES
+DBHZ                                                        SIGNAL STRENGTH UNIT
+    30.000                                                  INTERVAL
+  2016    03    28    00    00    0.0000000     GPS         TIME OF FIRST OBS
+  2016    03    28    23    59   30.0000000     GPS         TIME OF LAST OBS
+     0                                                      RCV CLOCK OFFS APPL
+G L2S -0.25000                                              SYS / PHASE SHIFT
+G L2X -0.25000                                              SYS / PHASE SHIFT
+R L2P  0.25000                                              SYS / PHASE SHIFT
+E L8Q -0.25000                                              SYS / PHASE SHIFT
+ 24 R01  1 R02 -4 R03  5 R04  6 R05  1 R06 -4 R07  5 R08  6 GLONASS SLOT / FRQ #
+    R09 -6 R10 -7 R11  0 R12 -1 R13 -2 R14 -7 R15  0 R16 -1 GLONASS SLOT / FRQ #
+    R17  4 R18 -3 R19  3 R20  2 R21  4 R22 -3 R23  3 R24  2 GLONASS SLOT / FRQ #
+ C1C  -71.940 C1P  -71.940 C2C  -71.940 C2P  -71.940        GLONASS COD/PHS/BIS
+    17    17  1851     3                                    LEAP SECONDS
+                                                            END OF HEADER
