@@ -167,6 +167,12 @@ namespace Rinex3Parser.Common
         E28,
         E29,
         E30,
+        E31,
+        E32,
+        E33,
+        E34,
+        E35,
+        E36        
     }
 
 
