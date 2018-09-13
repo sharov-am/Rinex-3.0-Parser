@@ -40,6 +40,21 @@ namespace Rinex3Parser.Common
             }
         }
 
+        public void ParseHeader()
+        {
+            try
+            {
+                using(Stream file = File.OpenRead(_filePath))
+                {
+                    var sr = new StreamReader(file);
+                    ParseHeader(sr);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new RinexParserException(e.Message, e);
+            }
+        }
 
         public static RinexParser ParserFactory(string filePath, ParseType parseType)
         {

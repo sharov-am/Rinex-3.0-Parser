@@ -127,6 +127,12 @@ namespace Rinex3Parser.Obs
             {
                 RinexHeaderLabel.NUMBER_OF_OBS, RinexRegex.NumberOfObsRegex
             },
+                {
+                        RinexHeaderLabel.CRINEX_VERSION, RinexRegex.A60Regex
+                },
+                {
+                        RinexHeaderLabel.CRINEX_PROGRAM, RinexRegex.A60Regex
+                }
         };
 
         #endregion
@@ -615,6 +621,10 @@ namespace Rinex3Parser.Obs
                     }
                     return true;
 
+                case RinexHeaderLabel.CRINEX_VERSION:
+                case RinexHeaderLabel.CRINEX_PROGRAM:
+                    ObsHeaderData.IsHatanaka = true;
+                    return true;
                 case RinexHeaderLabel.END_OF_HEADER:
                     return false;
             }
@@ -706,6 +716,7 @@ namespace Rinex3Parser.Obs
         public bool ApplyRcvClockOffset { get; set; }
         public LeapSeconds LeapSeconds_ { get; set; }
         public int NumberOfSatellites { get; set; }
+        public bool IsHatanaka { get; internal set; }
 
         #endregion
 

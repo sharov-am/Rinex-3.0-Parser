@@ -171,6 +171,7 @@ namespace Rinex3Parser.Obs
             while(cont)
             {
                 var line = sr.ReadLine();
+                if (line == null) break;//avoid inf. loop
                 if (!String.IsNullOrEmpty(line))
                 {
                     cont = RinexObsHeader.ParseHeaderLine(line);

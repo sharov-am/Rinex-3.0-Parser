@@ -40,5 +40,7 @@ namespace Rinex3Parser.Common
         internal const string IONOSPHERIC_CORRECTIONS = "IONOSPHERIC CORR";
         internal const string TIME_SYSTEM_CORRECTIONS = "TIME SYSTEM CORR";
         internal const string END_OF_HEADER = "END OF HEADER";
+        internal const string CRINEX_VERSION = "CRINEX VERS   / TYPE";
+        internal const string CRINEX_PROGRAM = "CRINEX PROG / DATE";
     }
 }

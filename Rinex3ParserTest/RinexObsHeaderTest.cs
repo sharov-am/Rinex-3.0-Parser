@@ -162,6 +162,13 @@ namespace Rinex3ParserTest
             Assert.AreEqual(3, obsHeader.LeapSeconds_.Day);
         }
 
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Header\\head.14o")]
+        public void Test_Rinex_Obs_Valid_Header_Parse()
+        {
+            var parser = new RinexObsParser("head.14o", ParseType.StoreData);
+            parser.ParseHeader();
+            Assert.IsTrue(true);
+        }
         [TestMethod, ExpectedException(typeof(ArgumentException), "Invalid gnss system designation.")]
         public void Test_Rinex_Obs_Header_Version_Exception_Raised()
         {
@@ -229,6 +236,40 @@ namespace Rinex3ParserTest
             header.ParseHeaderLine(headerLine);
         }
 
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\MATE00ITA_R_20181180000_01D_30S_MO.crx")]
+        public void Test_Correct_Parse_Of_Rinex_Header_Of_Hatanala_File()
+        {
+            var parser = new RinexObsParser("MATE00ITA_R_20181180000_01D_30S_MO.crx", ParseType.RaiseEvents);
+            parser.ParseHeader();
+            var hd = parser.ObsHeader.ObsHeaderData;
+            Assert.AreEqual(hd.X, 4641947.5008);
+            Assert.AreEqual(hd.Y, 1393045.2215);
+            Assert.AreEqual(hd.Z, 4133286.6560);
+            Assert.AreEqual(hd.FirstObs, new DateTime(2018, 4, 28));
+            Assert.AreEqual(hd.LastObs, new DateTime(2018, 4, 28, 23, 59, 30));
+        }
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Header\\glo_L3_codes_test.rnx")]
+        public void Glo_L3_Obs_Codes_Read()
+        {
+            var parser = new RinexObsParser("glo_L3_codes_test.rnx", ParseType.RaiseEvents);
+            parser.ParseHeader();
+            var hd = parser.ObsHeader.ObsHeaderData;
+            Assert.IsTrue(hd.ObsMetaData[SatelliteSystem.Glo].Observations.Contains(ObservationCode.L3X),
+                    "hd.ObsMetaData[SatelliteSystem.Gps].Observations.Contains(ObservationCode.L3X)");
+        }
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\MATE00ITA_R_20181180000_01D_30S_MO.crx"),
+         DeploymentItem("TestFiles\\Obs\\Header\\head.14o")]
+        public void Test_Correct_Recognition_Of_Hatanaka_File()
+        {
+            var parser = new RinexObsParser("MATE00ITA_R_20181180000_01D_30S_MO.crx", ParseType.RaiseEvents);
+            parser.ParseHeader();
+            var hd = parser.ObsHeader.ObsHeaderData;
+            Assert.IsTrue(hd.IsHatanaka, "hd.IsHatanaka");
+            parser = new RinexObsParser("head.14o", ParseType.RaiseEvents);
+            parser.ParseHeader();
+            hd = parser.ObsHeader.ObsHeaderData;
+            Assert.IsFalse(hd.IsHatanaka, "!hd.IsHatanaka");
+        }
         #endregion
     }
 }

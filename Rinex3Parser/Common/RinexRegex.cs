@@ -25,7 +25,7 @@ namespace Rinex3Parser.Common
         #region header regex
 
         internal static readonly Regex RinexVersionRegexp =
-                new Regex(@"^(?<rnxver>.{9})\s{11}(?<filetype>.{1}).{19}(?<satsystem>G|R|E|J|C|I|M)?.{19,20}$",
+                new Regex(@"^(?<rnxver>.{9})\s{11}(?<filetype>(O|N|M){1}).{19}(?<satsystem>G|R|E|J|C|I|M)?.{19,20}$",
                         CommonNonCompiledRegexOptions);
 
         internal static readonly Regex ProgramRunBy = new Regex(@"^(?<pgm>.{20})(?<runby>.{20})(?<date>.{20})$",
@@ -108,6 +108,9 @@ namespace Rinex3Parser.Common
                 new Regex(@"^\s{3,6}(?<type>\w)?\s{0,1}(?<satnum>\d{1,2})?(?<obs>\s{1,5}\d{1,6}){1,9}\s*$",
                         CommonCompiledRegexOptions);
 
+        internal static readonly Regex RinexV3FileNameAttrRegex = new Regex(
+                @"^(?<stname>\w{4})\w{2}(?<cc>\w{3})_(?<source>[R|U|S])_(?<year>\d{4})(?<doy>\d{3})(?<hh>\d{2})(?<mm>\d{2})_(?<interval>\d{2})(?<period>\w)_(?:(?<freq>\d{2})(?<frequnits>\w)){0,1}_{0,1}(?<gnss>\w)(?<type>\w).(?<fileformat>(crx|rnx))(?:.(?<zip>(zip|gz|bz2))){0,1}$",
+                CommonCompiledRegexOptions);
         #endregion
 
         #region obs data regex

@@ -109,7 +109,7 @@ namespace Rinex3Parser.Common
             var bands = new Dictionary<SatelliteSystem, int[]>
             {
                 {SatelliteSystem.Gps, new[] {1, 2, 5}},
-                {SatelliteSystem.Glo, new[] {1, 2}},
+                    {SatelliteSystem.Glo, new[] {1, 2, 3}},
                 {SatelliteSystem.Gal, new[] {1, 5, 6, 7, 8}},
                 {SatelliteSystem.Bds, new[] {2, 6, 7}},
                 {SatelliteSystem.Irnss, new[] {5, 9}},
@@ -121,30 +121,38 @@ namespace Rinex3Parser.Common
                 {
                     SatelliteSystem.Gps, new[]
                     {
-                        ObsAttribute.P, ObsAttribute.C, ObsAttribute.D, ObsAttribute.Y, ObsAttribute.M, ObsAttribute.N,
-                        ObsAttribute.I, ObsAttribute.Q, ObsAttribute.S, ObsAttribute.L, ObsAttribute.X, ObsAttribute.W
+                                    ObsAttribute.P, ObsAttribute.C, ObsAttribute.D, ObsAttribute.Y, ObsAttribute.M,
+                                    ObsAttribute.N,
+                                    ObsAttribute.I, ObsAttribute.Q, ObsAttribute.S, ObsAttribute.L, ObsAttribute.X,
+                                    ObsAttribute.W
                     }
                 },
-                {SatelliteSystem.Glo, new[] {ObsAttribute.P, ObsAttribute.C}},
+                    {SatelliteSystem.Glo, new[] {
+                            ObsAttribute.P, ObsAttribute.C, ObsAttribute.X, ObsAttribute.I, ObsAttribute.Q}},
                 {
                     SatelliteSystem.Gal, new[]
                     {
-                        ObsAttribute.A, ObsAttribute.B, ObsAttribute.C, ObsAttribute.I, ObsAttribute.Q, ObsAttribute.X,
+                                    ObsAttribute.A, ObsAttribute.B, ObsAttribute.C, ObsAttribute.I, ObsAttribute.Q,
+                                    ObsAttribute.X,
                         ObsAttribute.Z,
                     }
                 },
                 {SatelliteSystem.Bds, new[] {ObsAttribute.I, ObsAttribute.Q, ObsAttribute.X}},
                 {SatelliteSystem.Irnss, new[] {ObsAttribute.A, ObsAttribute.B, ObsAttribute.C, ObsAttribute.X}},
+                    {SatelliteSystem.Qzss,
+                            new[]
                 {
-                    SatelliteSystem.Qzss,
-                    new[] {ObsAttribute.I, ObsAttribute.Q, ObsAttribute.S, ObsAttribute.L, ObsAttribute.X}
+                                    ObsAttribute.C, ObsAttribute.I, ObsAttribute.Q, ObsAttribute.S, ObsAttribute.L,
+                                    ObsAttribute.X, ObsAttribute.Z
+                            }
                 },
-                {SatelliteSystem.Sbas, new[] {ObsAttribute.C}}
+                    {SatelliteSystem.Sbas, new[] {ObsAttribute.C, ObsAttribute.I, ObsAttribute.Q, ObsAttribute.X}}
             };
             using(var file = File.Create(Path.Combine(Environment.CurrentDirectory, "codes")))
             {
                 List<string> z = new List<string>();
-                var sw = new StreamWriter(file);
+                using(var sw = new StreamWriter(file))
+                {
                 foreach (var oType in Enum.GetNames(typeof(ObsType)))
                 {
                     var result = from band in bands
@@ -158,9 +166,11 @@ namespace Rinex3Parser.Common
 
                     z.AddRange(temp);
                 }
-                foreach (var obs in z.Distinct(StringComparer.Create(CultureInfo.InvariantCulture, true)))
+                    foreach (var obs in z.Distinct(StringComparer.Create(CultureInfo.InvariantCulture, true))
+                            .OrderBy(t => t, StringComparer.InvariantCultureIgnoreCase).ToList())
                 {
                     sw.WriteLine(obs + ",");
+                    }
                 }
             }
         }
