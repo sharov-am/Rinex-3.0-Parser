@@ -194,7 +194,15 @@ namespace Rinex3Parser.Obs
                     {
                         var dateVal = matchResult.Groups["date"].Value;
                         var temp = dateVal.Substring(0, 15);
-                        var temp2 = DateTime.ParseExact(temp, "yyyyMMdd HHmmss", null);
+                        DateTime temp2;
+                        try
+                        {
+                            temp2 = DateTime.ParseExact(temp, "yyyyMMdd HHmmss", null);
+                        }
+                        catch(FormatException)
+                        {
+                            temp2 = DateTime.Now;
+                        }
                         var zone = dateVal.Substring(16).Trim();
                         programInfo.FileCreationDateTime = DateTime.SpecifyKind(temp2,
                                 String.Equals(zone, "lcl", StringComparison.InvariantCultureIgnoreCase)
