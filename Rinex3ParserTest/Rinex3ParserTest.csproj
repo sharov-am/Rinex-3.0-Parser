@@ -87,6 +87,12 @@
     <None Include="TestFiles\Obs\Full\MATE00ITA_R_20181180000_01D_30S_MO.crx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\Obs\Full\ZIM300CHE_R_20182420828_01H_01S_MO.crx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\Obs\Full\ZIM300CHE_R_20182420828_01H_01S_MO.rnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\Obs\Header\head.14o">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

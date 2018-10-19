@@ -869,6 +869,13 @@ namespace Rinex3ParserTest
         }
 
 
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\ZIM300CHE_R_20182420828_01H_01S_MO.rnx")]
+        public void Test_Rinex_Successfull_Mixed3_Parse()
+        {
+            var parser = new RinexObsParser("ZIM300CHE_R_20182420828_01H_01S_MO.rnx", ParseType.RaiseEvents);
+            parser.Parse();
+            Assert.IsTrue(true);
+        }
         private static void CheckObsValueImpl(Observation observation, int? lockIndicator, int? sigStrength,
             double obsValue)
         {

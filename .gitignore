@@ -1,3 +1,8 @@
 *.pdb
 *.dll
 *.exe
+/Rinex3Parser/obj
+/Rinex3Parser/bin
+*.suo
+/Rinex3ParserTest/obj
+/Rinex3ParserTest/bin
