@@ -1445,7 +1445,7 @@ namespace Rinex3Parser.Obs
         private int CurrentPrn { get; set; }
         internal int ObsIndex { get; private set; }
 
-        internal ReadOnlyCollection<ObservationCode> Observations
+        public ReadOnlyCollection<ObservationCode> Observations
         {
             get { return new ReadOnlyCollection<ObservationCode>(_observations); }
         }
