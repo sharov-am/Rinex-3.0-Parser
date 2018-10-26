@@ -124,7 +124,7 @@ namespace Rinex3Parser.Common
 
         internal static readonly Regex ObsEpochRecordRegex =
                 new Regex(
-                        @"^>\s(?<year>\d{4})\s{1,2}(?<month>\d{1,2})\s{1,2}(?<day>\d{1,2})\s{1,2}(?<hour>\d{1,2})\s{1,2}(?<min>\d{1,2})\s{1,2}(?<preciseSec>\d{1,2}\.\d{7})\s\s(?<flag>\d)\s{0,2}(?<epochRecords>\d{1,3})\s{0,7}(?<rcvclkoffset>[-]?\d{0,2}.\d{12})?$",
+                        @"^>\s(?<year>\d{4})\s{1,2}(?<month>\d{1,2})\s{1,2}(?<day>\d{1,2})\s{1,2}(?<hour>\d{1,2})\s{1,2}(?<min>\d{1,2})\s{1,2}(?<preciseSec>\d{1,2}\.\d{7})\s\s(?<flag>\d)\s{0,2}(?<epochRecords>\d{1,3})\s{0,6}(?<rcvclkoffset>..\.\d{12})?\s*$",
                         CommonCompiledRegexOptions);
 
 
