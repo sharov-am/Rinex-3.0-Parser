@@ -868,7 +868,6 @@ namespace Rinex3ParserTest
             CheckObsValueImpl(s27Sat.Observations[ObservationCode.S1C], null, null, 47.350);
         }
 
-
         [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\ZIM300CHE_R_20182420828_01H_01S_MO.rnx")]
         public void Test_Rinex_Successfull_Mixed3_Parse()
         {
@@ -876,6 +875,21 @@ namespace Rinex3ParserTest
             parser.Parse();
             Assert.IsTrue(true);
         }
+
+
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\DAC200CHE_R_20182971100_01H_01S_MO.rnx")]
+        public void Test_Rinex_Successfull_EpochRecord()
+        {
+            var parser = new RinexObsParser("DAC200CHE_R_20182971100_01H_01S_MO.rnx", ParseType.StoreData);
+            parser.Parse();
+            Assert.IsTrue(true);
+            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.Day, 24));
+            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.EpochRecords, 26));
+            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.Hour, 11));
+            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.RcvClkOffset, 0.0));
+            Assert.IsTrue(Object.Equals(parser.ObservationRecords.Last().Key.EpochFlag, EpochFlag.Ok));
+        }
+
         private static void CheckObsValueImpl(Observation observation, int? lockIndicator, int? sigStrength,
             double obsValue)
         {
