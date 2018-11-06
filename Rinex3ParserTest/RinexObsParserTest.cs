@@ -883,11 +883,11 @@ namespace Rinex3ParserTest
             var parser = new RinexObsParser("DAC200CHE_R_20182971100_01H_01S_MO.rnx", ParseType.StoreData);
             parser.Parse();
             Assert.IsTrue(true);
-            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.Day, 24));
-            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.EpochRecords, 26));
-            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.Hour, 11));
-            Assert.IsTrue(Object.Equals(parser.ObservationRecords.First().Key.RcvClkOffset, 0.0));
-            Assert.IsTrue(Object.Equals(parser.ObservationRecords.Last().Key.EpochFlag, EpochFlag.Ok));
+            Assert.AreEqual(parser.ObservationRecords.First().Key.Day, 24);
+            Assert.AreEqual(parser.ObservationRecords.First().Key.EpochRecords, 26);
+            Assert.AreEqual(parser.ObservationRecords.First().Key.Hour, 11);
+            Assert.AreEqual(parser.ObservationRecords.First().Key.RcvClkOffset, 0.0);
+            Assert.AreEqual(parser.ObservationRecords.Last().Key.EpochFlag, EpochFlag.Ok);
         }
 
         private static void CheckObsValueImpl(Observation observation, int? lockIndicator, int? sigStrength,
