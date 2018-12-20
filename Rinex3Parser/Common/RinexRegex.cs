@@ -105,7 +105,7 @@ namespace Rinex3Parser.Common
                 CommonNonCompiledRegexOptions);
 
         internal static readonly Regex NumberOfObsRegex =
-                new Regex(@"^\s{3,6}(?<type>\w)?\s{0,1}(?<satnum>\d{1,2})?(?<obs>\s{1,5}\d{1,6}){1,9}\s*$",
+                new Regex(@"^\s{3,6}(?<type>\w)?\s{0,1}(?<satnum>\d{1,2})?(?<obs>\s{1,6}\d{1,6}){1,9}\s*$",
                         CommonCompiledRegexOptions);
 
         internal static readonly Regex RinexV3FileNameAttrRegex = new Regex(

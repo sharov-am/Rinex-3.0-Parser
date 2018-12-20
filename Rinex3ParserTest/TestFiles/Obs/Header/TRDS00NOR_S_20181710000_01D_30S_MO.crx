@@ -1,0 +1,197 @@
+3.0                 COMPACT RINEX FORMAT                    CRINEX VERS   / TYPE
+RNX2CRX ver.4.0.7                       21-Jun-18 08:04     CRINEX PROG / DATE
+     3.03           OBSERVATION DATA    M (MIXED)           RINEX VERSION / TYPE
+TPP 3.10.4                              20180619 235959 UTC PGM / RUN BY / DATE
+gfzrnx-1.10-7329    FILE CONVERSION     20180621 080416 UTC COMMENT
+                                                            COMMENT
+                                                            COMMENT
+                                                            COMMENT
+TRDS                                                        MARKER NAME
+10331M001                                                   MARKER NUMBER
+SATREF              Norwegian Mapping Authority             OBSERVER / AGENCY
+5547R50473          TRIMBLE NETR9       5.22                REC # / TYPE / VERS
+30318098            TRM55971.00     NONE                    ANT # / TYPE
+  2820171.1098   513485.9023  5678935.7406                  APPROX POSITION XYZ
+        5.5460        0.0070        0.0180                  ANTENNA: DELTA H/E/N
+     0                                                      RCV CLOCK OFFS APPL
+    18                  GPS                                 LEAP SECONDS
+ 24 R01  1 R02 -4 R03  5 R04  6 R05  1 R06 -4 R07  5 R08  6 GLONASS SLOT / FRQ #
+    R09 -2 R10 -7 R11  0 R12 -1 R13 -2 R14 -7 R15  0 R16 -1 GLONASS SLOT / FRQ #
+    R17  4 R18 -3 R19  3 R20  2 R21  4 R22 -3 R23  3 R24  2 GLONASS SLOT / FRQ #
+ C1C   19.070 C1P   19.070 C2C   19.070 C2P   19.070        GLONASS COD/PHS/BIS
+C   10 C2X C6X C7X D2X L2X L6X L7X S2X S6X S7X              SYS / # / OBS TYPES
+E   13 C1X C5X C7X C8X D1X L1X L5X L7X L8X S1X S5X S7X S8X  SYS / # / OBS TYPES
+G   15 C1C C2W C2X C5X D1C D2W D2X L1C L2W L2X L5X S1C S2W  SYS / # / OBS TYPES
+       S2X S5X                                              SYS / # / OBS TYPES
+R   13 C1C C1P C2C C2P D1C L1C L1P L2C L2P S1C S1P S2C S2P  SYS / # / OBS TYPES
+    83                                                      # OF SATELLITES
+   C02     2           1     2     2           1     2      PRN / # OF OBS
+           1                                                PRN / # OF OBS
+   C05  1899  1879  1886  1899  1899  1879  1886  1899  1879PRN / # OF OBS
+        1886                                                PRN / # OF OBS
+   C06   991   986   992   991   991   986   992   991   986PRN / # OF OBS
+         992                                                PRN / # OF OBS
+   C07   928   925   926   928   928   925   926   928   925PRN / # OF OBS
+         926                                                PRN / # OF OBS
+   C08   964   966   972   964   964   966   972   964   966PRN / # OF OBS
+         972                                                PRN / # OF OBS
+   C09  1166  1174  1165  1166  1166  1174  1165  1166  1174PRN / # OF OBS
+        1165                                                PRN / # OF OBS
+   C10  1210  1207  1205  1210  1210  1207  1205  1210  1207PRN / # OF OBS
+        1205                                                PRN / # OF OBS
+   C11   872   881   883   872   872   881   883   872   881PRN / # OF OBS
+         883                                                PRN / # OF OBS
+   C12  1050  1054  1054  1050  1050  1054  1054  1050  1054PRN / # OF OBS
+        1054                                                PRN / # OF OBS
+   C13  1141  1135  1125  1141  1141  1135  1125  1141  1135PRN / # OF OBS
+        1125                                                PRN / # OF OBS
+   C14  1117  1124  1123  1117  1117  1124  1123  1117  1124PRN / # OF OBS
+        1123                                                PRN / # OF OBS
+   E01  1222  1217  1215  1222  1222  1222  1217  1215  1222PRN / # OF OBS
+        1222  1217  1215  1222                              PRN / # OF OBS
+   E02   993   985   969   986   993   993   985   969   986PRN / # OF OBS
+         993   985   969   986                              PRN / # OF OBS
+   E03   546   542   536   543   546   546   542   536   543PRN / # OF OBS
+         546   542   536   543                              PRN / # OF OBS
+   E04  1360  1359  1356  1360  1360  1360  1359  1356  1360PRN / # OF OBS
+        1360  1359  1356  1360                              PRN / # OF OBS
+   E05   660   656   652   656   660   660   656   652   656PRN / # OF OBS
+         660   656   652   656                              PRN / # OF OBS
+   E07  1067  1066  1058  1067  1067  1067  1066  1058  1067PRN / # OF OBS
+        1067  1066  1058  1067                              PRN / # OF OBS
+   E08   770   767   755   767   770   770   767   755   767PRN / # OF OBS
+         770   767   755   767                              PRN / # OF OBS
+   E09  1028  1026  1021  1027  1028  1028  1026  1021  1027PRN / # OF OBS
+        1028  1026  1021  1027                              PRN / # OF OBS
+   E11   999   993   980   996   999   999   993   980   996PRN / # OF OBS
+         999   993   980   996                              PRN / # OF OBS
+   E12  1106  1099  1099  1106  1106  1106  1099  1099  1106PRN / # OF OBS
+        1106  1099  1099  1106                              PRN / # OF OBS
+   E19  1327  1318  1289  1325  1327  1327  1318  1289  1325PRN / # OF OBS
+        1327  1318  1289  1325                              PRN / # OF OBS
+   E24   728   728   721   728   728   728   728   721   728PRN / # OF OBS
+         728   728   721   728                              PRN / # OF OBS
+   E25   777   777   777   777   777   777   777   777   777PRN / # OF OBS
+         777   777   777   777                              PRN / # OF OBS
+   E26   944   941   941   943   944   944   941   941   943PRN / # OF OBS
+         944   941   941   943                              PRN / # OF OBS
+   E27  1087  1076  1070  1080  1087  1087  1076  1070  1080PRN / # OF OBS
+        1087  1076  1070  1080                              PRN / # OF OBS
+   E30  1046  1044  1041  1044  1046  1046  1044  1041  1044PRN / # OF OBS
+        1046  1044  1041  1044                              PRN / # OF OBS
+   E31  1022  1022  1022  1022  1022  1022  1022  1022  1022PRN / # OF OBS
+        1022  1022  1022  1022                              PRN / # OF OBS
+   G01   983   922   975   989   983   922   975   983   922PRN / # OF OBS
+         975   989   983   922   975   989                  PRN / # OF OBS
+   G02  1111  1079              1111  1079        1111  1079PRN / # OF OBS
+                    1111  1079                              PRN / # OF OBS
+   G03   962   868   943   966   962   868   943   962   868PRN / # OF OBS
+         943   966   962   868   943   966                  PRN / # OF OBS
+   G05  1101  1038  1083        1101  1038  1083  1101  1038PRN / # OF OBS
+        1083        1101  1038  1083                        PRN / # OF OBS
+   G06  1039  1001  1030  1046  1039  1001  1030  1039  1001PRN / # OF OBS
+        1030  1046  1039  1001  1030  1046                  PRN / # OF OBS
+   G07  1022   395   965        1022   395   965  1022   395PRN / # OF OBS
+         965        1022   395   965                        PRN / # OF OBS
+   G08  1036   967  1031  1049  1036   967  1031  1036   967PRN / # OF OBS
+        1031  1049  1036   967  1031  1049                  PRN / # OF OBS
+   G09   931   814   943   959   931   814   943   931   814PRN / # OF OBS
+         943   959   931   814   943   959                  PRN / # OF OBS
+   G10   945   885   943   969   945   885   943   945   885PRN / # OF OBS
+         943   969   945   885   943   969                  PRN / # OF OBS
+   G11   938   823               938   823         938   823PRN / # OF OBS
+                     938   823                              PRN / # OF OBS
+   G12  1014   899   975        1014   899   975  1014   899PRN / # OF OBS
+         975        1014   899   975                        PRN / # OF OBS
+   G13   926   812               926   812         926   812PRN / # OF OBS
+                     926   812                              PRN / # OF OBS
+   G14  1044   987              1044   987        1044   987PRN / # OF OBS
+                    1044   987                              PRN / # OF OBS
+   G15  1030   932  1002        1030   932  1002  1030   932PRN / # OF OBS
+        1002        1030   932  1002                        PRN / # OF OBS
+   G16  1010   932              1010   932        1010   932PRN / # OF OBS
+                    1010   932                              PRN / # OF OBS
+   G17  1127  1054  1095        1127  1054  1095  1127  1054PRN / # OF OBS
+        1095        1127  1054  1095                        PRN / # OF OBS
+   G18   928   806               928   806         928   806PRN / # OF OBS
+                     928   806                              PRN / # OF OBS
+   G19  1052  1004              1052  1004        1052  1004PRN / # OF OBS
+                    1052  1004                              PRN / # OF OBS
+   G20   988   904               988   904         988   904PRN / # OF OBS
+                     988   904                              PRN / # OF OBS
+   G21   997   853               997   853         997   853PRN / # OF OBS
+                     997   853                              PRN / # OF OBS
+   G22   899   789               899   789         899   789PRN / # OF OBS
+                     899   789                              PRN / # OF OBS
+   G23  1024   891              1024   891        1024   891PRN / # OF OBS
+                    1024   891                              PRN / # OF OBS
+   G24   945   898   947   961   945   898   947   945   898PRN / # OF OBS
+         947   961   945   898   947   961                  PRN / # OF OBS
+   G25   939   875   943   953   939   875   943   939   875PRN / # OF OBS
+         943   953   939   875   943   953                  PRN / # OF OBS
+   G26   996   970   996  1004   996   970   996   996   970PRN / # OF OBS
+         996  1004   996   970   996  1004                  PRN / # OF OBS
+   G27   949   880   963   975   949   880   963   949   880PRN / # OF OBS
+         963   975   949   880   963   975                  PRN / # OF OBS
+   G28  1034   948              1034   948        1034   948PRN / # OF OBS
+                    1034   948                              PRN / # OF OBS
+   G29  1031   914   993        1031   914   993  1031   914PRN / # OF OBS
+         993        1031   914   993                        PRN / # OF OBS
+   G30   964   830   957   975   964   830   957   964   830PRN / # OF OBS
+         957   975   964   830   957   975                  PRN / # OF OBS
+   G31  1036   998  1019        1036   998  1019  1036   998PRN / # OF OBS
+        1019        1036   998  1019                        PRN / # OF OBS
+   G32  1074  1024  1068  1083  1074  1024  1068  1074  1024PRN / # OF OBS
+        1068  1083  1074  1024  1068  1083                  PRN / # OF OBS
+   R01   955   954   922   892   955   955   954   922   892PRN / # OF OBS
+         955   954   922   892                              PRN / # OF OBS
+   R02  1001  1002   975   963  1001  1001  1002   975   963PRN / # OF OBS
+        1001  1002   975   963                              PRN / # OF OBS
+   R03   958   959   950   932   958   958   959   950   932PRN / # OF OBS
+         958   959   950   932                              PRN / # OF OBS
+   R04   976   976   957   940   976   976   976   957   940PRN / # OF OBS
+         976   976   957   940                              PRN / # OF OBS
+   R05  1115  1109   567   433  1115  1115  1109   567   433PRN / # OF OBS
+        1115  1109   567   433                              PRN / # OF OBS
+   R06  1064  1059              1064  1064  1059            PRN / # OF OBS
+        1064  1059                                          PRN / # OF OBS
+   R07  1202  1202  1187  1171  1202  1202  1202  1187  1171PRN / # OF OBS
+        1202  1202  1187  1171                              PRN / # OF OBS
+   R08  1044  1041  1016  1003  1044  1044  1041  1016  1003PRN / # OF OBS
+        1044  1041  1016  1003                              PRN / # OF OBS
+   R09  1096  1094  1078  1064  1096  1096  1094  1078  1064PRN / # OF OBS
+        1096  1094  1078  1064                              PRN / # OF OBS
+   R10  1013  1010   941   850  1013  1013  1010   941   850PRN / # OF OBS
+        1013  1010   941   850                              PRN / # OF OBS
+   R11  1044  1041  1033  1002  1044  1044  1041  1033  1002PRN / # OF OBS
+        1044  1041  1033  1002                              PRN / # OF OBS
+   R12   950   945               950   950   945            PRN / # OF OBS
+         950   945                                          PRN / # OF OBS
+   R13   870   860   820   786   870   870   860   820   786PRN / # OF OBS
+         870   860   820   786                              PRN / # OF OBS
+   R14  1046  1042  1021   997  1046  1046  1042  1021   997PRN / # OF OBS
+        1046  1042  1021   997                              PRN / # OF OBS
+   R15  1174  1172  1111  1072  1174  1174  1172  1111  1072PRN / # OF OBS
+        1174  1172  1111  1072                              PRN / # OF OBS
+   R16  1163  1160  1138  1100  1163  1163  1160  1138  1100PRN / # OF OBS
+        1163  1160  1138  1100                              PRN / # OF OBS
+   R17  1030  1030  1026  1004  1030  1030  1030  1026  1004PRN / # OF OBS
+        1030  1030  1026  1004                              PRN / # OF OBS
+   R18   992   989   985   973   992   992   989   985   973PRN / # OF OBS
+         992   989   985   973                              PRN / # OF OBS
+   R19   942   940   934   918   942   942   940   934   918PRN / # OF OBS
+         942   940   934   918                              PRN / # OF OBS
+   R20   952   952   952   950   952   952   952   952   950PRN / # OF OBS
+         952   952   952   950                              PRN / # OF OBS
+   R21  1058  1058  1056  1042  1058  1058  1058  1056  1042PRN / # OF OBS
+        1058  1058  1056  1042                              PRN / # OF OBS
+   R22  1167  1166  1157  1130  1167  1167  1166  1157  1130PRN / # OF OBS
+        1167  1166  1157  1130                              PRN / # OF OBS
+   R23  1171  1169  1095  1022  1171  1171  1169  1095  1022PRN / # OF OBS
+        1171  1169  1095  1022                              PRN / # OF OBS
+   R24   999   997   725   503   999   999   997   725   503PRN / # OF OBS
+         999   997   725   503                              PRN / # OF OBS
+    30.000                                                  INTERVAL
+  2018     6    20     0     0    0.0000000     GPS         TIME OF FIRST OBS
+  2018     6    20    23    59   30.0000000     GPS         TIME OF LAST OBS
+                                                            END OF HEADER

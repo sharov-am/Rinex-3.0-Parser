@@ -96,6 +96,9 @@
     <None Include="TestFiles\Obs\Full\STK200JPN_R_20183310000_01D_30S_MO.crx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\Obs\Header\TRDS00NOR_S_20181710000_01D_30S_MO.crx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\Obs\Full\TSK200JPN_R_20180010000_01D_30S_MO.rnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
