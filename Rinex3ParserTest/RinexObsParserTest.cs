@@ -909,6 +909,13 @@ namespace Rinex3ParserTest
             CollectionAssert.AreEqual(expectedObs, obs.Observations);
         }
 
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\TSK200JPN_R_20180010000_01D_30S_MO.rnx")]
+        public void Test_Rinex_Missing_SystemTime_In_Obs_Time_In_Header_Successfull_Parse()
+        {
+            var parser = new RinexObsParser("TSK200JPN_R_20180010000_01D_30S_MO.rnx", ParseType.StoreData);
+            parser.Parse();
+            Assert.IsTrue(true);
+         }
         #endregion
     }
 }

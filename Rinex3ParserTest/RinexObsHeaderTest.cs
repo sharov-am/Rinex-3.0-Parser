@@ -278,6 +278,14 @@ namespace Rinex3ParserTest
             var hd = parser.ObsHeader.ObsHeaderData;
             Assert.IsTrue(hd.IsHatanaka, "hd.IsHatanaka");
         }
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\STK200JPN_R_20183310000_01D_30S_MO.crx")]
+        public void Test_Correct_Hatanaka_Header_Parse2()
+        {
+            var parser = new RinexObsParser("STK200JPN_R_20183310000_01D_30S_MO.crx", ParseType.RaiseEvents);
+            parser.ParseHeader();
+            var hd = parser.ObsHeader.ObsHeaderData;
+            Assert.IsTrue(hd.IsHatanaka, "hd.IsHatanaka");
+        }
         #endregion
     }
 }

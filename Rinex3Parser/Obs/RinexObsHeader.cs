@@ -364,8 +364,15 @@ namespace Rinex3Parser.Obs
                     var hour = Int32.Parse(matchResult.Groups["hour"].Value, CultureInfo.InvariantCulture);
                     var min = Int32.Parse(matchResult.Groups["min"].Value, CultureInfo.InvariantCulture);
                     var sec = Double.Parse(matchResult.Groups["preciseSec"].Value, CultureInfo.InvariantCulture);
+                    if(matchResult.Groups["timesystem"].Success)
+                    {
                     var timeSystem = Enum.Parse(typeof(GnssTimeSystem), matchResult.Groups["timesystem"].Value, true);
                     ObsHeaderData.GnssTimeSystem = (GnssTimeSystem)timeSystem;
+                    }
+                    else
+                    {
+                        ObsHeaderData.GnssTimeSystem = GnssTimeSystem.Gps;//by default...
+                    }
                     switch(header)
                     {
                         case RinexHeaderLabel.FIRST_OBS:
@@ -463,8 +470,10 @@ namespace Rinex3Parser.Obs
                             ObservationCode =
                                 (ObservationCode)
                                         Enum.Parse(typeof(ObservationCode), matchResult.Groups["obscode"].Value, true),
-                            CorrectionCycles =
-                                Double.Parse(matchResult.Groups["corrcycles"].Value, CultureInfo.InvariantCulture)
+                                CorrectionCycles = matchResult.Groups["corrcycles"].Success
+                                        ? Double.Parse(matchResult.Groups["corrcycles"].Value,
+                                                CultureInfo.InvariantCulture)
+                                        : 0.0
                         };
                         if (matchResult.Groups["sta"].Success)
                         {

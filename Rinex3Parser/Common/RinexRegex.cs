@@ -68,7 +68,7 @@ namespace Rinex3Parser.Common
 
         internal static readonly Regex ObsTimeRegex =
                 new Regex(
-                        @"^\s*(?<year>\d{1,4})\s+(?<month>\d{1,2})\s+(?<day>\d{1,2})\s+(?<hour>\d{1,2})\s+(?<min>\d{1,2})\s+(?<preciseSec>\d{1,5}\.\d{7})\s+(?<timesystem>GPS|GLO|GAL|QZS|BDT|IRN)\s+$",
+                        @"^\s*(?<year>\d{1,4})\s+(?<month>\d{1,2})\s+(?<day>\d{1,2})\s+(?<hour>\d{1,2})\s+(?<min>\d{1,2})\s+(?<preciseSec>\d{1,5}\.\d{7})\s+(?<timesystem>GPS|GLO|GAL|QZS|BDT|IRN)?\s+$",
                         CommonNonCompiledRegexOptions);
 
         internal static readonly Regex RcvClkOffsetAplRegex = new Regex(@"^\s+(?<rcv_clk_offs_appl>\d)\s+$",
