@@ -72,6 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TestFiles\Nav\BRDC00IGS_R_20181640000_01D_MN.rnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\Nav\mixed_nav.16m">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -92,6 +95,9 @@
     </None>
     <None Include="TestFiles\Obs\Full\MATE00ITA_R_20181180000_01D_30S_MO.crx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\Obs\Full\OUL200FIN_R_20181640000_01D_30S_MO.rnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\Obs\Full\STK200JPN_R_20183310000_01D_30S_MO.crx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

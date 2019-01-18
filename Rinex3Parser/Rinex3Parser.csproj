@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CharToHourMap.cs" />
     <Compile Include="Common\EnumExtensions.cs" />
     <Compile Include="Common\FileNameAttributes.cs" />
     <Compile Include="Common\Helper.cs" />

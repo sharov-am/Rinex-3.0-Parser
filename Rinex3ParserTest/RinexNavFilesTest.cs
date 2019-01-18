@@ -1,15 +1,15 @@
 ﻿// Rinex3ParserTest
-// RinexNavFilesTest.cs-2016-09-14
+// RinexNavFilesTest.cs-2019-01-15
 
 #region
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rinex3Parser.Common;
 using Rinex3Parser.Nav;
-
 
 #endregion
 
@@ -36,32 +36,41 @@ namespace Rinex3ParserTest
 
             var metaData = parser.NavHeader.NavHeaderData;
             Assert.IsTrue(metaData.SatelliteSystem == SatelliteSystem.Bds);
-            Assert.IsTrue(metaData.IonoCorrections.Count == 1, "metaData.IonoCorrections.Count == 1");
+            Assert.IsTrue(metaData.IonoCorrectionsCount == 2, "metaData.IonoCorrectionsCount == 2");
 
-            var bdsCorrections = metaData.IonoCorrections[0];
+            var bdsCorrections = metaData.GetAlphaCorrections(SatelliteSystem.Bds);
+            Assert.IsTrue(bdsCorrections.Count() == 1, "bdsCorrections.Count() == 1");
 
-            var alpha0 = bdsCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
+            var bdsAlphaCorrections = bdsCorrections.Single();
+
+            var alpha0 = bdsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
             Assert.IsTrue(Math.Abs(alpha0 - DParse("2.1420E-08")) < Double.Epsilon);
 
-            var alpha1 = bdsCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
+            var alpha1 = bdsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
             Assert.IsTrue(Math.Abs(alpha1 - DParse("2.4587E-07")) < Double.Epsilon);
 
-            var alpha2 = bdsCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
+            var alpha2 = bdsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
             Assert.IsTrue(Math.Abs(alpha2 - DParse("-2.4438E-06")) < Double.Epsilon);
 
-            var alpha3 = bdsCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
+            var alpha3 = bdsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
             Assert.IsTrue(Math.Abs(alpha3 - DParse("5.0068E-06")) < Double.Epsilon);
 
-            var beta0 = bdsCorrections.Corrections[IonoCorrectionsEnum.Beta0];
+            bdsCorrections = metaData.GetBetaCorrections(SatelliteSystem.Bds);
+            Assert.IsTrue(bdsCorrections.Count() == 1, "bdsCorrections.Count() == 1");
+
+            var bdsBetaCorrections = bdsCorrections.Single();
+
+
+            var beta0 = bdsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta0];
             Assert.IsTrue(Math.Abs(beta0 - DParse("7.9872E+04")) < Double.Epsilon);
 
-            var beta1 = bdsCorrections.Corrections[IonoCorrectionsEnum.Beta1];
+            var beta1 = bdsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta1];
             Assert.IsTrue(Math.Abs(beta1 - DParse("1.3107E+05")) < Double.Epsilon);
 
-            var beta2 = bdsCorrections.Corrections[IonoCorrectionsEnum.Beta2];
+            var beta2 = bdsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta2];
             Assert.IsTrue(Math.Abs(beta2 - DParse("5.8982E+05")) < Double.Epsilon);
 
-            var beta3 = bdsCorrections.Corrections[IonoCorrectionsEnum.Beta3];
+            var beta3 = bdsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta3];
             Assert.IsTrue(Math.Abs(beta3 - DParse("-7.8643E+05")) < Double.Epsilon);
 
             Assert.IsTrue(metaData.TimeSystemCorrections.Count == 1, "metaData.TimeSystemCorrections.Count == 1");
@@ -139,7 +148,7 @@ namespace Rinex3ParserTest
 
             var metaData = parser.NavHeader.NavHeaderData;
             Assert.IsTrue(metaData.SatelliteSystem == SatelliteSystem.Glo);
-            Assert.IsTrue(metaData.IonoCorrections.Count == 0, "metaData.IonoCorrections.Count == 0");
+            Assert.IsTrue(metaData.IonoCorrectionsCount == 0, "metaData.IonoCorrectionsCount == 0");
 
             Assert.IsTrue(metaData.TimeSystemCorrections.Count == 1, "metaData.TimeSystemCorrections.Count == 1");
 
@@ -162,9 +171,9 @@ namespace Rinex3ParserTest
             Assert.IsTrue(week == 0, "week is wrong");
 
             Assert.IsTrue(metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.FutureNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.Week == 1851, "metaData.LeapSeconds.Week == 1851");
             Assert.IsTrue(metaData.LeapSeconds.Day == 3, "metaData.LeapSeconds.Day == 3");
 
@@ -207,35 +216,43 @@ namespace Rinex3ParserTest
 
             var metaData = parser.NavHeader.NavHeaderData;
             Assert.IsTrue(metaData.SatelliteSystem == SatelliteSystem.Qzss);
-            Assert.IsTrue(metaData.IonoCorrections.Count == 1, "metaData.IonoCorrections.Count == 1");
+            Assert.IsTrue(metaData.IonoCorrectionsCount == 2, "metaData.IonoCorrectionsCount == 2");
 
-            var qzssCorrections = metaData.IonoCorrections[0];
+            var qzssCorrections = metaData.GetAlphaCorrections(SatelliteSystem.Qzss);
+            Assert.IsTrue(qzssCorrections.Count() == 1, "qzssAlphaCorrections.Count() == 1");
 
-            var alpha0 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
+            var qzssAlphaCorrections = qzssCorrections.Single();
+
+            var alpha0 = qzssAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
             Assert.IsTrue(Math.Abs(alpha0 - DParse("0.0000E+00")) < Double.Epsilon);
 
-            var alpha1 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
+            var alpha1 = qzssAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
             Assert.IsTrue(Math.Abs(alpha1 - DParse("0.0000E+00")) < Double.Epsilon);
 
-            var alpha2 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
+            var alpha2 = qzssAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
             Assert.IsTrue(Math.Abs(alpha2 - DParse("0.0000E+00")) < Double.Epsilon);
 
-            var alpha3 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
+            var alpha3 = qzssAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
             Assert.IsTrue(Math.Abs(alpha3 - DParse("0.0000E+00")) < Double.Epsilon);
 
-            var beta0 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta0];
+            qzssCorrections = metaData.GetBetaCorrections(SatelliteSystem.Qzss);
+            Assert.IsTrue(qzssCorrections.Count() == 1, "qzssAlphaCorrections.Count() == 1");
+
+            var qzssBetaCorrections = qzssCorrections.Single();
+
+            var beta0 = qzssBetaCorrections.Corrections[IonoCorrectionsEnum.Beta0];
             Assert.IsTrue(Math.Abs(beta0 - DParse("0.0000E+00")) < Double.Epsilon);
 
-            var beta1 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta1];
+            var beta1 = qzssBetaCorrections.Corrections[IonoCorrectionsEnum.Beta1];
             Assert.IsTrue(Math.Abs(beta1 - DParse("0.0000E+00")) < Double.Epsilon);
 
-            var beta2 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta2];
+            var beta2 = qzssBetaCorrections.Corrections[IonoCorrectionsEnum.Beta2];
             Assert.IsTrue(Math.Abs(beta2 - DParse("0.0000E+00")) < Double.Epsilon);
 
-            var beta3 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta3];
+            var beta3 = qzssBetaCorrections.Corrections[IonoCorrectionsEnum.Beta3];
             Assert.IsTrue(Math.Abs(beta3 - DParse("0.0000E+00")) < Double.Epsilon);
 
-
+            
             Assert.IsTrue(metaData.TimeSystemCorrections.Count == 1, "metaData.TimeSystemCorrections.Count == 1");
             var timeSystemCorrection = metaData.TimeSystemCorrections[0];
 
@@ -256,7 +273,7 @@ namespace Rinex3ParserTest
             Assert.IsTrue(week == 0, "week is wrong");
 
             Assert.IsTrue(metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
 
 
             var messages = parser.GetMessagesOfType<QzssNavMessage>().ToList();
@@ -318,21 +335,25 @@ namespace Rinex3ParserTest
 
             var metaData = parser.NavHeader.NavHeaderData;
             Assert.IsTrue(metaData.SatelliteSystem == SatelliteSystem.Gal);
-            Assert.IsTrue(metaData.IonoCorrections.Count == 1, "metaData.IonoCorrections.Count == 1");
+            Assert.IsTrue(metaData.IonoCorrectionsCount == 1, "metaData.IonoCorrectionsCount == 1");
 
-            var qzssCorrections = metaData.IonoCorrections[0];
+            var galCorrections = metaData.GetCorrections(SatelliteSystem.Gal);
 
-            var alpha0 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
-            Assert.IsTrue(Math.Abs(alpha0 - DParse("7.3250E+01")) < Double.Epsilon);
+            Assert.IsTrue(galCorrections.Count() == 1, "galCorrections.Count() == 1");
 
-            var alpha1 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
-            Assert.IsTrue(Math.Abs(alpha1 - DParse("-5.2734E-01")) < Double.Epsilon);
+            var galCorrection = galCorrections.Single();
 
-            var alpha2 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
-            Assert.IsTrue(Math.Abs(alpha2 - DParse("8.9111E-03")) < Double.Epsilon);
+            var ai0 = galCorrection.Corrections[IonoCorrectionsEnum.Ai0];
+            Assert.IsTrue(Math.Abs(ai0 - DParse("7.3250E+01")) < Double.Epsilon);
 
-            var alpha3 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
-            Assert.IsTrue(Math.Abs(alpha3 - DParse("0.0000E+00 ")) < Double.Epsilon);
+            var ai1 = galCorrection.Corrections[IonoCorrectionsEnum.Ai1];
+            Assert.IsTrue(Math.Abs(ai1 - DParse("-5.2734E-01")) < Double.Epsilon);
+
+            var ai2 = galCorrection.Corrections[IonoCorrectionsEnum.Ai2];
+            Assert.IsTrue(Math.Abs(ai2 - DParse("8.9111E-03")) < Double.Epsilon);
+
+            var reserve = galCorrection.Corrections[IonoCorrectionsEnum.Ai2 + 1];
+            Assert.IsTrue(Math.Abs(reserve - DParse("0.0000E+00 ")) < Double.Epsilon);
 
             Assert.IsTrue(metaData.TimeSystemCorrections.Count == 2, "metaData.TimeSystemCorrections.Count == 2");
 
@@ -370,13 +391,13 @@ namespace Rinex3ParserTest
 
 
             Assert.IsTrue(metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.FutureNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.Week == 1851,
-                "metaData.LeapSeconds.Week == 1851");
+                    "metaData.LeapSeconds.Week == 1851");
             Assert.IsTrue(metaData.LeapSeconds.Day == 3,
-                "metaData.LeapSeconds.Day == 3");
+                    "metaData.LeapSeconds.Day == 3");
 
 
             var messages = parser.GetMessagesOfType<GalNavMessage>().ToList();
@@ -436,32 +457,44 @@ namespace Rinex3ParserTest
 
             var metaData = parser.NavHeader.NavHeaderData;
             Assert.IsTrue(metaData.SatelliteSystem == SatelliteSystem.Gps);
-            Assert.IsTrue(metaData.IonoCorrections.Count == 1, "metaData.IonoCorrections.Count == 1");
+            Assert.IsTrue(metaData.IonoCorrectionsCount == 2, "metaData.IonoCorrectionsCount == 2");
 
-            var gpsCorrections = metaData.IonoCorrections[0];
+            var gpsCorrections = metaData.GetAlphaCorrections(SatelliteSystem.Gps);
 
-            var alpha0 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
+            Assert.IsTrue(gpsCorrections.Count() == 1,"gpsCorrections.Count() == 1");
+            var gpsAlphaCorrection = gpsCorrections.Single();
+
+            var alpha0 = gpsAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha0];
             Assert.IsTrue(Math.Abs(alpha0 - DParse("1.2107E-08")) < Double.Epsilon);
 
-            var alpha1 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
+            var alpha1 = gpsAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha1];
             Assert.IsTrue(Math.Abs(alpha1 - DParse("-7.4506E-09")) < Double.Epsilon);
 
-            var alpha2 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
+            var alpha2 = gpsAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha2];
             Assert.IsTrue(Math.Abs(alpha2 - DParse("-5.9605E-08")) < Double.Epsilon);
 
-            var alpha3 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
+            var alpha3 = gpsAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha3];
             Assert.IsTrue(Math.Abs(alpha3 - DParse("5.9605E-08")) < Double.Epsilon);
 
-            var beta0 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta0];
+
+
+            gpsCorrections = metaData.GetBetaCorrections(SatelliteSystem.Gps);
+
+            Assert.IsTrue(gpsCorrections.Count() == 1, "gpsCorrections.Count() == 1");
+            var gpsBetaCorrection = gpsCorrections.Single();
+
+
+
+            var beta0 = gpsBetaCorrection.Corrections[IonoCorrectionsEnum.Beta0];
             Assert.IsTrue(Math.Abs(beta0 - DParse("1.1469E+05")) < Double.Epsilon);
 
-            var beta1 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta1];
+            var beta1 = gpsBetaCorrection.Corrections[IonoCorrectionsEnum.Beta1];
             Assert.IsTrue(Math.Abs(beta1 - DParse("-1.3107E+05")) < Double.Epsilon);
 
-            var beta2 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta2];
+            var beta2 = gpsBetaCorrection.Corrections[IonoCorrectionsEnum.Beta2];
             Assert.IsTrue(Math.Abs(beta2 - DParse("-2.6214E+05")) < Double.Epsilon);
 
-            var beta3 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta3];
+            var beta3 = gpsBetaCorrection.Corrections[IonoCorrectionsEnum.Beta3];
             Assert.IsTrue(Math.Abs(beta3 - DParse(" 7.2090E+05")) < Double.Epsilon);
 
             Assert.IsTrue(metaData.TimeSystemCorrections.Count == 1, "metaData.TimeSystemCorrections.Count == 1");
@@ -483,13 +516,13 @@ namespace Rinex3ParserTest
             Assert.IsTrue(week == 1882, "week is wrong");
 
             Assert.IsTrue(metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.FutureNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.Week == 1851,
-                "metaData.LeapSeconds.Week == 1851");
+                    "metaData.LeapSeconds.Week == 1851");
             Assert.IsTrue(metaData.LeapSeconds.Day == 3,
-                "metaData.LeapSeconds.Day == 3");
+                    "metaData.LeapSeconds.Day == 3");
 
 
             var messages = parser.GetMessagesOfType<GpsNavMessage>().ToList();
@@ -549,71 +582,91 @@ namespace Rinex3ParserTest
 
             var metaData = parser.NavHeader.NavHeaderData;
             Assert.IsTrue(metaData.SatelliteSystem == SatelliteSystem.Mixed);
-            Assert.IsTrue(metaData.IonoCorrections.Count == 3, "metaData.IonoCorrections.Count == 3");
+            Assert.IsTrue(metaData.IonoCorrectionsCount == 5, "metaData.IonoCorrectionsCount == 5");
 
-            var gpsCorrections = metaData.IonoCorrections[0]; //gps iono corrections
+            var gpsCorrections = metaData.GetAlphaCorrections(SatelliteSystem.Gps); //gps iono corrections
 
-            var alpha0 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
+            Assert.IsTrue(gpsCorrections.Count() == 1,"gpsCorrections.Count() == 1");
+            var gpsAlphaCorrections = gpsCorrections.Single();
+
+            var alpha0 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
             Assert.IsTrue(Math.Abs(alpha0 - DParse(".1397E-07")) < Double.Epsilon);
 
-            var alpha1 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
+            var alpha1 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
             Assert.IsTrue(Math.Abs(alpha1 - DParse(".2235E-07")) < Double.Epsilon);
 
-            var alpha2 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
+            var alpha2 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
             Assert.IsTrue(Math.Abs(alpha2 - DParse("-.1192E-06")) < Double.Epsilon);
 
-            var alpha3 = gpsCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
+            var alpha3 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
             Assert.IsTrue(Math.Abs(alpha3 - DParse("-.1192E-06")) < Double.Epsilon);
 
-            var beta0 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta0];
+            gpsCorrections = metaData.GetBetaCorrections(SatelliteSystem.Gps);
+
+            Assert.IsTrue(gpsCorrections.Count() == 1, "gpsCorrections.Count() == 1");
+            var gpsBetaCorrections = gpsCorrections.Single();
+
+            var beta0 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta0];
             Assert.IsTrue(Math.Abs(beta0 - DParse(".1044E+06")) < Double.Epsilon);
 
-            var beta1 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta1];
+            var beta1 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta1];
             Assert.IsTrue(Math.Abs(beta1 - DParse(".9830E+05")) < Double.Epsilon);
 
-            var beta2 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta2];
+            var beta2 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta2];
             Assert.IsTrue(Math.Abs(beta2 - DParse("-.1966E+06")) < Double.Epsilon);
 
-            var beta3 = gpsCorrections.Corrections[IonoCorrectionsEnum.Beta3];
+            var beta3 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta3];
             Assert.IsTrue(Math.Abs(beta3 - DParse("-.3932E+06")) < Double.Epsilon);
 
-            var galCorrections = metaData.IonoCorrections[1];
-            alpha0 = galCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
+
+            var  galCorrections = metaData.GetCorrections(SatelliteSystem.Gal);
+
+            Assert.IsTrue(galCorrections.Count() == 1, "galCorrections.Count() == 1");
+            var galCorrection = galCorrections.Single();
+
+            alpha0 = galCorrection.Corrections[IonoCorrectionsEnum.Ai0];
             Assert.IsTrue(Math.Abs(alpha0 - DParse(".3750E+02")) < Double.Epsilon);
 
-            alpha1 = galCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
+            alpha1 = galCorrection.Corrections[IonoCorrectionsEnum.Ai1];
             Assert.IsTrue(Math.Abs(alpha1 - DParse(".1953E-01")) < Double.Epsilon);
 
-            alpha2 = galCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
+            alpha2 = galCorrection.Corrections[IonoCorrectionsEnum.Ai2];
             Assert.IsTrue(Math.Abs(alpha2 - DParse(".1657E-01")) < Double.Epsilon);
 
-            alpha3 = galCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
+            alpha3 = galCorrection.Corrections[IonoCorrectionsEnum.Ai2 + 1];
             Assert.IsTrue(Math.Abs(alpha3 - DParse(".0000E+00")) < Double.Epsilon);
 
-            var qzssCorrections = metaData.IonoCorrections[2];
+            
+            var qzssAlpaCorrections = metaData.GetAlphaCorrections(SatelliteSystem.Qzss);
+            Assert.IsTrue(qzssAlpaCorrections.Count() == 1,"qzssAlpaCorrections.Count() == 1");
+            var qzssAlphaCorrection = qzssAlpaCorrections.Single();
 
-            alpha0 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
+            alpha0 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha0];
             Assert.IsTrue(Math.Abs(alpha0 - DParse(".2980E-07")) < Double.Epsilon);
 
-            alpha1 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
+            alpha1 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha1];
             Assert.IsTrue(Math.Abs(alpha1 - DParse("-.2012E-06")) < Double.Epsilon);
 
-            alpha2 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
+            alpha2 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha2];
             Assert.IsTrue(Math.Abs(alpha2 - DParse("-.1192E-06")) < Double.Epsilon);
 
-            alpha3 = qzssCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
+            alpha3 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha3];
             Assert.IsTrue(Math.Abs(alpha3 - DParse(".1669E-05")) < Double.Epsilon);
 
-            beta0 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta0];
+            var qzssBetaCorrections = metaData.GetBetaCorrections(SatelliteSystem.Qzss);
+            Assert.IsTrue(qzssBetaCorrections.Count() == 1, "qzssBetaCorrections.Count() == 1");
+            var qzssBetaCorrection = qzssBetaCorrections.Single();
+
+            beta0 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta0];
             Assert.IsTrue(Math.Abs(beta0 - DParse(".1188E+06")) < Double.Epsilon);
 
-            beta1 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta1];
+            beta1 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta1];
             Assert.IsTrue(Math.Abs(beta1 - DParse("-.4588E+06")) < Double.Epsilon);
 
-            beta2 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta2];
+            beta2 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta2];
             Assert.IsTrue(Math.Abs(beta2 - DParse(".1507E+07")) < Double.Epsilon);
 
-            beta3 = qzssCorrections.Corrections[IonoCorrectionsEnum.Beta3];
+            beta3 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta3];
             Assert.IsTrue(Math.Abs(beta3 - DParse(".8323E+07")) < Double.Epsilon);
 
 
@@ -668,13 +721,13 @@ namespace Rinex3ParserTest
             Assert.IsTrue(week == 1895, "week is wrong");
 
             Assert.IsTrue(metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.CurrentNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.FutureNumOfLeapSeconds == 17,
-                "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
+                    "metaData.LeapSeconds.FutureNumOfLeapSeconds == 17");
             Assert.IsTrue(metaData.LeapSeconds.Week == 1851,
-                "metaData.LeapSeconds.Week == 1851");
+                    "metaData.LeapSeconds.Week == 1851");
             Assert.IsTrue(metaData.LeapSeconds.Day == 3,
-                "metaData.LeapSeconds.Day == 3");
+                    "metaData.LeapSeconds.Day == 3");
 
 
             var gpsNavMessages = parser.GetMessagesOfType<GpsNavMessage>().ToList();
@@ -798,6 +851,224 @@ namespace Rinex3ParserTest
 
             Assert.IsTrue(Math.Abs(e11Sat.Ttom - DParse(".431485000000E+06")) < Double.Epsilon);
         }
+
+
+        [TestMethod, DeploymentItem(@"TestFiles\\Nav\\BRDC00IGS_R_20181640000_01D_MN.rnx")]
+        public void Check_Igs_Global_Brdc_Parse()
+        {
+            var parser = new RinexNavParser("BRDC00IGS_R_20181640000_01D_MN.rnx", ParseType.RaiseEvents);
+            parser.NavHeaderInfoEvent += (sender, data) =>{} ;
+            parser.NewNavMessageEvent += (sender, message) => { };
+            parser.Parse();
+            
+            Assert.IsTrue(true);
+            
+        }
+
+
+        [TestMethod, DeploymentItem(@"TestFiles\\Nav\\BRDC00IGS_R_20181640000_01D_MN.rnx")]
+        public void Check_Igs_Global_Brdc_Iono_Correction()
+        {
+            var parser = new RinexNavParser("BRDC00IGS_R_20181640000_01D_MN.rnx", ParseType.StoreData);
+            parser.Parse();
+
+            Assert.IsTrue(parser.RinexType == RinexType.Nav);
+
+            var metaData = parser.NavHeader.NavHeaderData;
+            Assert.IsTrue(metaData.SatelliteSystem == SatelliteSystem.Mixed);
+
+            Assert.IsTrue(metaData.IonoCorrectionsCount == 33, "metaData.IonoCorrectionsCount == 33");
+
+            
+            
+            var gpsCorrections = metaData.GetAlphaCorrections(SatelliteSystem.Gps); //gps iono corrections
+            Assert.IsTrue(gpsCorrections.Count() == 1,"gpsCorrections.Count() == 1");
+
+            var gpsAlphaCorrections = gpsCorrections.Single();
+
+            var alpha0 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha0];
+            Assert.IsTrue(Math.Abs(alpha0 - DParse("5.5879E-09")) < Double.Epsilon);
+
+            var beta1 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("1.4901E-08")) < Double.Epsilon);
+
+            var beta2 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("-5.9605E-08")) < Double.Epsilon);
+
+            var beta3 = gpsAlphaCorrections.Corrections[IonoCorrectionsEnum.Alpha3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("-1.1921E-07")) < Double.Epsilon);
+
+            gpsCorrections = metaData.GetBetaCorrections(SatelliteSystem.Gps);
+            Assert.IsTrue(gpsCorrections.Count() == 1, "gpsCorrections.Count() == 1");
+
+            var gpsBetaCorrections = gpsCorrections.Single();
+
+            var beta0 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta0];
+            Assert.IsTrue(Math.Abs(beta0 - DParse("8.3968E+04")) < Double.Epsilon);
+
+            beta1 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("9.8304E+04")) < Double.Epsilon);
+
+            beta2 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("-6.5536E+04")) < Double.Epsilon);
+
+            beta3 = gpsBetaCorrections.Corrections[IonoCorrectionsEnum.Beta3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("-5.2429E+05")) < Double.Epsilon);
+
+            
+            
+            var galCorrections = metaData.GetCorrections(SatelliteSystem.Gal);
+            Assert.IsTrue(galCorrections.Count() == 1,"galCorrections.Count() == 1");
+            var galCorrection = galCorrections.Single();
+
+            alpha0 = galCorrection.Corrections[IonoCorrectionsEnum.Ai0];
+            Assert.IsTrue(Math.Abs(alpha0 - DParse("2.3500E+01")) < Double.Epsilon);
+
+            beta1 = galCorrection.Corrections[IonoCorrectionsEnum.Ai1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("-3.5156E-02")) < Double.Epsilon);
+
+            beta2 = galCorrection.Corrections[IonoCorrectionsEnum.Ai2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("1.4008E-02")) < Double.Epsilon);
+
+            beta3 = galCorrection.Corrections[IonoCorrectionsEnum.Ai2 + 1];
+            Assert.IsTrue(Math.Abs(beta3 - DParse(".0000E+00")) < Double.Epsilon);
+
+
+
+
+            var qzssCorrections = metaData.GetAlphaCorrections(SatelliteSystem.Qzss);
+            Assert.IsTrue(qzssCorrections.Count() == 1,"qzssCorrections.Count() == 1");
+            var qzssAlphaCorrection = qzssCorrections.Single();
+
+            alpha0 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha0];
+            Assert.IsTrue(Math.Abs(alpha0 - DParse("1.7695E-08")) < Double.Epsilon);
+
+            beta1 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("-1.5646E-07")) < Double.Epsilon);
+
+            beta2 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("5.3644E-07")) < Double.Epsilon);
+
+            beta3 = qzssAlphaCorrection.Corrections[IonoCorrectionsEnum.Alpha3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("-1.8477E-06")) < Double.Epsilon);
+
+            qzssCorrections = metaData.GetBetaCorrections(SatelliteSystem.Qzss);
+            Assert.IsTrue(qzssCorrections.Count() == 1, "qzssCorrections.Count() == 1");
+            var qzssBetaCorrection = qzssCorrections.Single();
+
+
+            beta0 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta0];
+            Assert.IsTrue(Math.Abs(beta0 - DParse("1.9866E+05")) < Double.Epsilon);
+
+            beta1 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("-1.9005E+06")) < Double.Epsilon);
+
+            beta2 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("8.3231E+06")) < Double.Epsilon);
+
+            beta3 = qzssBetaCorrection.Corrections[IonoCorrectionsEnum.Beta3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("-7.7988E+06")) < Double.Epsilon);
+
+
+            var bdsCorrections = metaData.GetCorrections(SatelliteSystem.Bds);
+            var totalBdsCorCount = bdsCorrections.Count();
+
+            Assert.IsTrue(totalBdsCorCount == 28,"totalBdsCorCount == 28");
+            Assert.IsTrue(metaData.GetAlphaCorrections(SatelliteSystem.Bds).Count() == totalBdsCorCount / 2,
+                    "metaData.GetAlphaCorrections(SatelliteSystem.Bds).Count() == totalBdsCorCount/2");
+
+            Assert.IsTrue(metaData.GetBetaCorrections(SatelliteSystem.Bds).Count() == totalBdsCorCount / 2,
+                    "metaData.GetAlphaCorrections(SatelliteSystem.Bds).Count() == totalBdsCorCount/2");
+
+
+            var temp = metaData.GetCorrections(SatelliteSystem.Bds, IonoCorrectionsEnum.Alpha0, 'w', 1);
+            Assert.IsTrue(temp.Count() == 1,"temp.Count() == 1");
+            
+            var sv1wA = temp.Single();
+            
+            Assert.IsTrue(sv1wA.SatId == 1,"sv1wA.SatId == 1");
+            Assert.IsTrue(Char.ToLower(sv1wA.TimeMark) == 'w', "sv1wA.TimeMark == 'w'");
+            alpha0 = sv1wA.Corrections[IonoCorrectionsEnum.Alpha0];
+            Assert.IsTrue(Math.Abs(alpha0 - DParse("5.5879E-09")) < Double.Epsilon);
+
+            beta1 = sv1wA.Corrections[IonoCorrectionsEnum.Alpha1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("9.6858E-08")) < Double.Epsilon);
+
+            beta2 = sv1wA.Corrections[IonoCorrectionsEnum.Alpha2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("-7.7486E-07")) < Double.Epsilon);
+
+            beta3 = sv1wA.Corrections[IonoCorrectionsEnum.Alpha3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("1.4305E-06")) < Double.Epsilon);
+
+
+            temp = metaData.GetCorrections(SatelliteSystem.Bds, IonoCorrectionsEnum.Beta0, 'w', 1);
+            Assert.IsTrue(temp.Count() == 1, "temp.Count() == 1");
+
+            var sv1wB = temp.Single();
+
+            Assert.IsTrue(sv1wB.SatId == 1, "sv1wB.SatId == 1");
+            Assert.IsTrue(Char.ToLower(sv1wB.TimeMark) == 'w', "Char.ToLower(sv1wB.TimeMark) == 'w'");
+            
+            beta0 = sv1wB.Corrections[IonoCorrectionsEnum.Beta0];
+            Assert.IsTrue(Math.Abs(beta0 - DParse("1.4131E+05")) < Double.Epsilon);
+
+            beta1 = sv1wB.Corrections[IonoCorrectionsEnum.Beta1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("-5.7344E+05")) < Double.Epsilon);
+
+            beta2 = sv1wB.Corrections[IonoCorrectionsEnum.Beta2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("5.0463E+06")) < Double.Epsilon);
+
+            beta3 = sv1wB.Corrections[IonoCorrectionsEnum.Beta3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("-4.5220E+06")) < Double.Epsilon);
+
+            temp = metaData.GetCorrections(SatelliteSystem.Bds, IonoCorrectionsEnum.Alpha0, 2, 4);
+            Assert.IsTrue(temp.Count() == 1, "temp.Count() == 1");
+
+            var sv4cA = temp.Single();
+
+            Assert.IsTrue(sv4cA.SatId == 4, "sv4wA.SatId == 4");
+            Assert.IsTrue(Char.ToLower(sv4cA.TimeMark) == 'c', "Char.ToLower(sv1wB.TimeMark) == 'c'");
+            
+            alpha0 = sv4cA.Corrections[IonoCorrectionsEnum.Alpha0];
+            Assert.IsTrue(Math.Abs(alpha0 - DParse("8.3819E-09")) < Double.Epsilon);
+
+            beta1 = sv4cA.Corrections[IonoCorrectionsEnum.Alpha1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("6.7055E-08")) < Double.Epsilon);
+
+            beta2 = sv4cA.Corrections[IonoCorrectionsEnum.Alpha2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("-7.1526E-07")) < Double.Epsilon);
+
+            beta3 = sv4cA.Corrections[IonoCorrectionsEnum.Alpha3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("1.3709E-06")) < Double.Epsilon);
+
+
+            temp = metaData.GetCorrections(SatelliteSystem.Bds, IonoCorrectionsEnum.Beta0, 'c', 4);
+            Assert.IsTrue(temp.Count() == 1, "temp.Count() == 1");
+            
+            var sv4cB = temp.Single();
+
+            Assert.IsTrue(sv4cB.SatId == 4, "sv4wB.SatId == 4");
+            Assert.IsTrue(Char.ToLower(sv4cB.TimeMark) == 'c', "Char.ToLower(sv1wB.TimeMark) == 'c'");
+
+
+            beta0 = sv4cB.Corrections[IonoCorrectionsEnum.Beta0];
+            Assert.IsTrue(Math.Abs(beta0 - DParse("1.3926E+05")) < Double.Epsilon);
+
+            beta1 = sv4cB.Corrections[IonoCorrectionsEnum.Beta1];
+            Assert.IsTrue(Math.Abs(beta1 - DParse("-4.5875E+05")) < Double.Epsilon);
+
+            beta2 = sv4cB.Corrections[IonoCorrectionsEnum.Beta2];
+            Assert.IsTrue(Math.Abs(beta2 - DParse("4.1288E+06")) < Double.Epsilon);
+
+            beta3 = sv4cB.Corrections[IonoCorrectionsEnum.Beta3];
+            Assert.IsTrue(Math.Abs(beta3 - DParse("-3.6700E+06")) < Double.Epsilon);
+
+
+            
+
+        }
+
+
 
         #endregion
     }

@@ -868,6 +868,8 @@ namespace Rinex3ParserTest
             CheckObsValueImpl(s27Sat.Observations[ObservationCode.S1C], null, null, 47.350);
         }
 
+
+
         [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\ZIM300CHE_R_20182420828_01H_01S_MO.rnx")]
         public void Test_Rinex_Successfull_Mixed3_Parse()
         {
@@ -909,6 +911,7 @@ namespace Rinex3ParserTest
             CollectionAssert.AreEqual(expectedObs, obs.Observations);
         }
 
+
         [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\TSK200JPN_R_20180010000_01D_30S_MO.rnx")]
         public void Test_Rinex_Missing_SystemTime_In_Obs_Time_In_Header_Successfull_Parse()
         {
@@ -916,6 +919,20 @@ namespace Rinex3ParserTest
             parser.Parse();
             Assert.IsTrue(true);
          }
+        
+        
+        
+        //OUL200FIN_R_20181640000_01D_30S_MO.rnx
+
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Full\\OUL200FIN_R_20181640000_01D_30S_MO.rnx")]
+        public void Test_Rinex_Successfull_Mixed4_Parse()
+        {
+            var parser = new RinexObsParser("OUL200FIN_R_20181640000_01D_30S_MO.rnx", ParseType.StoreData);
+            parser.Parse();
+            Assert.IsTrue(true);
+        }
+
+
         #endregion
     }
 }

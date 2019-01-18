@@ -28,105 +28,105 @@ namespace Rinex3Parser.Obs
 
         private static readonly Dictionary<string, Regex> HeaderRegexps = new Dictionary<string, Regex>
         {
-            {
-                RinexHeaderLabel.VERSION, RinexRegex.RinexVersionRegexp
-            },
-            {
-                RinexHeaderLabel.PROGRAM, RinexRegex.ProgramRunBy
-            },
-            {
-                RinexHeaderLabel.COMMENT, RinexRegex.A60Regex
-            },
-            {
-                RinexHeaderLabel.MARKER_NAME, RinexRegex.A60Regex
-            },
-            {
-                RinexHeaderLabel.MARKER_NUMBER, RinexRegex.A20Regex
-            },
-            {
-                RinexHeaderLabel.MARKER_TYPE, RinexRegex.A20Regex
-            },
-            {
-                RinexHeaderLabel.OBSERVER, RinexRegex.ObserverAgencyRegex
-            },
-            {
-                RinexHeaderLabel.RECEIVER, RinexRegex.ReceiverRegex
-            },
-            {
-                RinexHeaderLabel.ANTENNA_TYPE, RinexRegex.AntennaTypRegex
-            },
-            {
-                RinexHeaderLabel.POSITION, RinexRegex.PositionRegex
-            },
-            {
-                RinexHeaderLabel.ANTENNA_OFFSETS, RinexRegex.AntennaOffsetRegex
-            },
-            {
-                RinexHeaderLabel.ANTENNA_XYZ_OFFSETS, RinexRegex.PositionRegex
-            },
-            {
-                RinexHeaderLabel.ANTENNA_PHASECENTER, RinexRegex.PhaseCenterRegex
-            },
-            {
-                RinexHeaderLabel.ANTENNA_B_SIGHT_XYZ, RinexRegex.PositionRegex
-            },
-            {
-                RinexHeaderLabel.ANTENNA_ZERODIR_AZI, RinexRegex.AntennaZeroDirAziRegex
-            },
-            {
-                RinexHeaderLabel.ANTENNA_ZERODIR_XYZ, RinexRegex.PositionRegex
-            },
-            {
-                RinexHeaderLabel.CENTER_OF_MASS_XYZ, RinexRegex.PositionRegex
-            },
-            {
-                RinexHeaderLabel.SYS_OBS_TYPES, RinexRegex.SysObsTypesRegex
-            },
-            {
-                RinexHeaderLabel.SIGNAL_STRENGTH_UNIT, RinexRegex.A20Regex
-            },
-            {
-                RinexHeaderLabel.INTERVAL, RinexRegex.IntervalRegex
-            },
-            {
-                RinexHeaderLabel.FIRST_OBS, RinexRegex.ObsTimeRegex
-            },
-            {
-                RinexHeaderLabel.LAST_OBS, RinexRegex.ObsTimeRegex
-            },
-            {
-                RinexHeaderLabel.RCV_CLOCK_OFFSET, RinexRegex.RcvClkOffsetAplRegex
-            },
-            {
-                RinexHeaderLabel.SYS_DCBS_APPLIED, RinexRegex.CorrectionInfoRegex
-            },
-            {
-                RinexHeaderLabel.SYS_PCVS_APPLIED, RinexRegex.CorrectionInfoRegex
-            },
-            {
-                RinexHeaderLabel.SYS_SCALE_FACTOR, RinexRegex.SysScaleFactorRegex
-            },
-            {
-                RinexHeaderLabel.SYS_PHASE_SHIFT, RinexRegex.SysPhaseShiftRegex
-            },
-            {
-                RinexHeaderLabel.GLONASS_SLOT_FRQ, RinexRegex.GloSlotFreqRegex
-            },
-            {
-                RinexHeaderLabel.GLONASS_COD_PHS_BIS, RinexRegex.GloCodePhaBiasRegex
-            },
-            {
-                RinexHeaderLabel.GLONASS_COD_PHS_BIS2, RinexRegex.GloCodePhaBiasRegex
-            },
-            {
-                RinexHeaderLabel.LEAP_SECONDS, RinexRegex.LeapSecondRegex
-            },
-            {
-                RinexHeaderLabel.NUMBER_OF_SATELLITES, RinexRegex.NumberOfSatellites
-            },
-            {
-                RinexHeaderLabel.NUMBER_OF_OBS, RinexRegex.NumberOfObsRegex
-            },
+                {
+                        RinexHeaderLabel.VERSION, RinexRegex.RinexVersionRegexp
+                },
+                {
+                        RinexHeaderLabel.PROGRAM, RinexRegex.ProgramRunBy
+                },
+                {
+                        RinexHeaderLabel.COMMENT, RinexRegex.A60Regex
+                },
+                {
+                        RinexHeaderLabel.MARKER_NAME, RinexRegex.A60Regex
+                },
+                {
+                        RinexHeaderLabel.MARKER_NUMBER, RinexRegex.A20Regex
+                },
+                {
+                        RinexHeaderLabel.MARKER_TYPE, RinexRegex.A20Regex
+                },
+                {
+                        RinexHeaderLabel.OBSERVER, RinexRegex.ObserverAgencyRegex
+                },
+                {
+                        RinexHeaderLabel.RECEIVER, RinexRegex.ReceiverRegex
+                },
+                {
+                        RinexHeaderLabel.ANTENNA_TYPE, RinexRegex.AntennaTypRegex
+                },
+                {
+                        RinexHeaderLabel.POSITION, RinexRegex.PositionRegex
+                },
+                {
+                        RinexHeaderLabel.ANTENNA_OFFSETS, RinexRegex.AntennaOffsetRegex
+                },
+                {
+                        RinexHeaderLabel.ANTENNA_XYZ_OFFSETS, RinexRegex.PositionRegex
+                },
+                {
+                        RinexHeaderLabel.ANTENNA_PHASECENTER, RinexRegex.PhaseCenterRegex
+                },
+                {
+                        RinexHeaderLabel.ANTENNA_B_SIGHT_XYZ, RinexRegex.PositionRegex
+                },
+                {
+                        RinexHeaderLabel.ANTENNA_ZERODIR_AZI, RinexRegex.AntennaZeroDirAziRegex
+                },
+                {
+                        RinexHeaderLabel.ANTENNA_ZERODIR_XYZ, RinexRegex.PositionRegex
+                },
+                {
+                        RinexHeaderLabel.CENTER_OF_MASS_XYZ, RinexRegex.PositionRegex
+                },
+                {
+                        RinexHeaderLabel.SYS_OBS_TYPES, RinexRegex.SysObsTypesRegex
+                },
+                {
+                        RinexHeaderLabel.SIGNAL_STRENGTH_UNIT, RinexRegex.A20Regex
+                },
+                {
+                        RinexHeaderLabel.INTERVAL, RinexRegex.IntervalRegex
+                },
+                {
+                        RinexHeaderLabel.FIRST_OBS, RinexRegex.ObsTimeRegex
+                },
+                {
+                        RinexHeaderLabel.LAST_OBS, RinexRegex.ObsTimeRegex
+                },
+                {
+                        RinexHeaderLabel.RCV_CLOCK_OFFSET, RinexRegex.RcvClkOffsetAplRegex
+                },
+                {
+                        RinexHeaderLabel.SYS_DCBS_APPLIED, RinexRegex.CorrectionInfoRegex
+                },
+                {
+                        RinexHeaderLabel.SYS_PCVS_APPLIED, RinexRegex.CorrectionInfoRegex
+                },
+                {
+                        RinexHeaderLabel.SYS_SCALE_FACTOR, RinexRegex.SysScaleFactorRegex
+                },
+                {
+                        RinexHeaderLabel.SYS_PHASE_SHIFT, RinexRegex.SysPhaseShiftRegex
+                },
+                {
+                        RinexHeaderLabel.GLONASS_SLOT_FRQ, RinexRegex.GloSlotFreqRegex
+                },
+                {
+                        RinexHeaderLabel.GLONASS_COD_PHS_BIS, RinexRegex.GloCodePhaBiasRegex
+                },
+                {
+                        RinexHeaderLabel.GLONASS_COD_PHS_BIS2, RinexRegex.GloCodePhaBiasRegex
+                },
+                {
+                        RinexHeaderLabel.LEAP_SECONDS, RinexRegex.LeapSecondRegex
+                },
+                {
+                        RinexHeaderLabel.NUMBER_OF_SATELLITES, RinexRegex.NumberOfSatellites
+                },
+                {
+                        RinexHeaderLabel.NUMBER_OF_OBS, RinexRegex.NumberOfObsRegex
+                },
                 {
                         RinexHeaderLabel.CRINEX_VERSION, RinexRegex.A60Regex
                 },
@@ -203,6 +203,7 @@ namespace Rinex3Parser.Obs
                         {
                             temp2 = DateTime.Now;
                         }
+
                         var zone = dateVal.Substring(16).Trim();
                         programInfo.FileCreationDateTime = DateTime.SpecifyKind(temp2,
                                 String.Equals(zone, "lcl", StringComparison.InvariantCultureIgnoreCase)
@@ -364,10 +365,12 @@ namespace Rinex3Parser.Obs
                     var hour = Int32.Parse(matchResult.Groups["hour"].Value, CultureInfo.InvariantCulture);
                     var min = Int32.Parse(matchResult.Groups["min"].Value, CultureInfo.InvariantCulture);
                     var sec = Double.Parse(matchResult.Groups["preciseSec"].Value, CultureInfo.InvariantCulture);
+                    //NOTE obseverd empty time system on Japan based stations
+                    //(see Test_Rinex_Missing_SystemTime_In_Obs_Time_In_Header_Successfull_Parse unit test)
                     if(matchResult.Groups["timesystem"].Success)
                     {
-                    var timeSystem = Enum.Parse(typeof(GnssTimeSystem), matchResult.Groups["timesystem"].Value, true);
-                    ObsHeaderData.GnssTimeSystem = (GnssTimeSystem)timeSystem;
+                        var timeSystem = Enum.Parse(typeof(GnssTimeSystem), matchResult.Groups["timesystem"].Value, true);
+                        ObsHeaderData.GnssTimeSystem = (GnssTimeSystem)timeSystem;
                     }
                     else
                     {
@@ -467,8 +470,8 @@ namespace Rinex3Parser.Obs
 
                         var phaseShiftData = new RinexObsHeaderData.PhaseShiftData
                         {
-                            ObservationCode =
-                                (ObservationCode)
+                                ObservationCode =
+                                        (ObservationCode)
                                         Enum.Parse(typeof(ObservationCode), matchResult.Groups["obscode"].Value, true),
                                 CorrectionCycles = matchResult.Groups["corrcycles"].Success
                                         ? Double.Parse(matchResult.Groups["corrcycles"].Value,
@@ -495,6 +498,7 @@ namespace Rinex3Parser.Obs
                             ObsHeaderData.PhaseShiftDict.Add(satSystem,
                                     new List<RinexObsHeaderData.PhaseShiftData> {phaseShiftData});
                         }
+
                         _currentPhaseShiftData = phaseShiftData;
                     }
                     else
@@ -641,7 +645,9 @@ namespace Rinex3Parser.Obs
                 case RinexHeaderLabel.CRINEX_VERSION:
                 case RinexHeaderLabel.CRINEX_PROGRAM:
                     ObsHeaderData.IsHatanaka = true;
+                    //ignore crx data
                     return true;
+
                 case RinexHeaderLabel.END_OF_HEADER:
                     return false;
             }
@@ -1471,9 +1477,16 @@ namespace Rinex3Parser.Obs
         internal void AddNumberOfObservations(int obsIndex, int obsNum)
         {
             //get observation code by index
-            var obsCode = _observations[obsIndex];
-            var obsData = SatObservations[CurrentPrn];
-            obsData[obsCode] = obsNum;
+            try
+            {
+                var obsCode = _observations[obsIndex];
+                var obsData = SatObservations[CurrentPrn];
+                obsData[obsCode] = obsNum;
+            }
+            catch(Exception e)
+            {
+                
+            }
         }
 
         internal void AddNumberOfObservations(int obsIndex, int prn, int numOfObs)

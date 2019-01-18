@@ -47,6 +47,11 @@ namespace Rinex3Parser.Nav
 
         #region Methods
 
+        public void SetTime(DateTime dt)
+        {
+            Time = dt;
+        }
+                 
         public T ConvertTo<T>() where T:NavMessage
         {
             return this as T;

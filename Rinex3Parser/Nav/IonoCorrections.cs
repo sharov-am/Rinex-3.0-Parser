@@ -3,7 +3,9 @@
 
 #region
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using Rinex3Parser.Common;
@@ -23,6 +25,11 @@ namespace Rinex3Parser.Nav
         Beta1,
         Beta2,
         Beta3,
+        Ai0,
+        Ai1,
+        Ai2,
+        Reserve
+        
     }
 
 
@@ -52,13 +59,24 @@ namespace Rinex3Parser.Nav
         private readonly Dictionary<IonoCorrectionsEnum, double> _ionoCorrections =
                 new Dictionary<IonoCorrectionsEnum, double>();
 
-        private readonly List<int> _satGroupId = new List<int>(2);
-        private readonly List<char> _timeMark = new List<char>(2);
+        private readonly int? _satId;
+        private readonly char? _timeMark;
         private readonly SatelliteSystem _satelliteSystem;
 
-        public IonoCorrections(SatelliteSystem satelliteSystem)
+        public IonoCorrections(SatelliteSystem satelliteSystem, IEnumerable<double> corrections, IonoCorrectionsEnum startIndex,
+                char? timeMark, int? satId)
         {
             _satelliteSystem = satelliteSystem;
+            _timeMark = timeMark;
+            _satId = satId;
+            var index = 0;
+            foreach (var correction in corrections)
+            {
+                Debug.Assert(Enum.IsDefined(typeof(IonoCorrectionsEnum), startIndex + index),
+                        "Enum.IsDefined(typeof(IonoCorrectionsEnum),startIndex + index)");
+                _ionoCorrections.Add(startIndex + index, correction);
+                index++;
+            }
         }
 
         #endregion
@@ -71,9 +89,9 @@ namespace Rinex3Parser.Nav
         }
 
         
-        public List<char> TimeMark
+        public char TimeMark
         {
-            get { return _timeMark; }
+            get { return _timeMark ?? ' '; }
         }
 
         internal SatelliteSystem SatelliteSystem
@@ -81,28 +99,19 @@ namespace Rinex3Parser.Nav
             get { return _satelliteSystem; }
         }
 
+        public int? SatId
+        {
+            get { return _satId; }
+        }
+
         #endregion
 
         #region Methods
 
-        internal void AddCorrections(int index, double[] corr, int? satId, char? timeMark)
-        {
-            foreach (var c in corr)
-            {
-                _ionoCorrections.Add((IonoCorrectionsEnum)index, c);
-                index++;
-            }
-            if (satId.HasValue) _satGroupId.Add(satId.Value);
-            if (timeMark.HasValue) _timeMark.Add(timeMark.Value);
-        }
 
-        internal void AddCorrections(int index, double[] corr)
+        public bool HasCorrection(IonoCorrectionsEnum corType)
         {
-            foreach (var c in corr)
-            {
-                _ionoCorrections.Add((IonoCorrectionsEnum)index, c);
-                index++;
-            }
+            return _ionoCorrections.ContainsKey(corType);
         }
 
         public IEnumerable<string> StringRepresentation()
@@ -128,8 +137,7 @@ namespace Rinex3Parser.Nav
                 }
                 if (_satelliteSystem == SatelliteSystem.Bds)
                 {
-                    sb.AppendFormat(" {0} {1,2}", _timeMark.Count > 0 ? _timeMark[0].ToString() : " ",
-                            _satGroupId.Count > 0 ? _satGroupId[0].ToString() : " ");
+                    sb.AppendFormat(" {0} {1,2}", _timeMark?? ' ',_satId.HasValue? _satId.Value.ToString("00") : " ");
                 }
                 sb.Append(' ', 60 - sb.Length);
                 yield return sb.ToString();
@@ -143,6 +151,7 @@ namespace Rinex3Parser.Nav
                 {
                     sb.AppendFormat("{0,4} ", IonoName[SatelliteSystem] + "B");
                 }
+
                 start = (int)IonoCorrectionsEnum.Beta0;
                 end = (int)IonoCorrectionsEnum.Beta3;
                 for (int i = start; i <= end; i++)
@@ -153,10 +162,11 @@ namespace Rinex3Parser.Nav
                                     ? _ionoCorrections[ic].ToString("0.0000E+00", CultureInfo.InvariantCulture)
                                     : " ");
                 }
+
                 if (_satelliteSystem == SatelliteSystem.Bds)
                 {
-                    sb.AppendFormat(" {0} {1,2}", _timeMark.Count > 0 ? _timeMark[0].ToString() : " ",
-                            _satGroupId.Count > 0 ? _satGroupId[0].ToString() : " ");
+                    sb.AppendFormat(" {0} {1,2}", _timeMark ?? ' ',
+                            _satId.HasValue ? _satId.Value.ToString("00") : " ");
                 }
 
                 sb.Append(' ', 60 - sb.Length);
