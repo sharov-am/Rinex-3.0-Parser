@@ -105,6 +105,13 @@ namespace Rinex3Parser.Common
         G31,
         G32,
         G33,
+        G34,
+        G35,
+        G36,
+        G37,
+        G38,
+        G39,
+        G40
     }
 
 
@@ -147,7 +154,39 @@ namespace Rinex3Parser.Common
         C34,
         C35,
         C36,
-        C37
+        C37,
+        C38,
+        C39,
+        C40,
+        C41,
+        C42,
+        C43,
+        C44,
+        C45,
+        C46,
+        C47,
+        C48,
+        C49,
+        C50,
+        C51,
+        C52,
+        C53,
+        C54,
+        C55,
+        C56,
+        C57,
+        C58,
+        C59,
+        C60,
+        C61,
+        C62,
+        C63,
+        C64,
+        C65,
+        C66,
+        C67,
+        C68,
+        C69,
     }
 
 
@@ -279,6 +318,8 @@ namespace Rinex3Parser.Common
         S36,
         S37,
         S38,
+        S39,
+        S40
     }
 
 
