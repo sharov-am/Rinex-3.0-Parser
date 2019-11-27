@@ -102,6 +102,10 @@
     <None Include="TestFiles\Obs\Full\STK200JPN_R_20183310000_01D_30S_MO.crx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\Obs\Header\interval_bug_fix.19o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\Obs\Header\invalid_header_no_sysobs.rnx" />
     <None Include="TestFiles\Obs\Header\TRDS00NOR_S_20181710000_01D_30S_MO.crx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -124,9 +128,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\Obs\Header\invalid_header_no_markername.rnx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Obs\Header\invalid_header_no_sysobs.rnx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\Obs\Header\valid_header.rnx">

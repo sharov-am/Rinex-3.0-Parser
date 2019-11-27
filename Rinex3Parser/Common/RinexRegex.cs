@@ -63,7 +63,7 @@ namespace Rinex3Parser.Common
                 new Regex(@"^(?<satsystem>G|R|E|J|C|I|M|S)?\s{2,}(?<numofobs>\d{1,3})?(?<obs>\s\w{3}){1,}",
                         CommonCompiledRegexOptions);
 
-        internal static readonly Regex IntervalRegex = new Regex(@"^\s*(?<interval>\d{1,6}\.\d{3})\s+$",
+        internal static readonly Regex IntervalRegex = new Regex(@"^\s*(?<interval>\d{1,7}\.\d{3})\s+$",
                 CommonNonCompiledRegexOptions); //F10.3
 
         internal static readonly Regex ObsTimeRegex =

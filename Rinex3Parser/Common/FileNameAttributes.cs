@@ -423,8 +423,15 @@ namespace Rinex3Parser.Common
                 return false;
             }
 
+            try
+            {
             fna = ParseFileName(match);
             return true;
+            }
+            catch(Exception e)
+            {
+                throw new ArgumentException(String.Format("Error parsing fname {0}", filename), e);
+            }
         }
 
         #endregion

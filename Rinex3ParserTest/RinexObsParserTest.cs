@@ -933,6 +933,13 @@ namespace Rinex3ParserTest
         }
 
 
+        [TestMethod, DeploymentItem("TestFiles\\Obs\\Header\\interval_bug_fix.19o")]
+        public void Test_Correct_Interval_Parse()
+        {
+            var parser = new RinexObsParser(@"interval_bug_fix.19o", ParseType.StoreData);
+            parser.Parse();
+            Assert.IsTrue(true);
+        }
         #endregion
     }
 }
